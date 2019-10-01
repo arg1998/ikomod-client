@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:ikomod/pages/CompetitionScreen.dart';
-import 'package:ikomod/pages/HomeScreen.dart';
-import 'package:ikomod/pages/NewPostScreen.dart';
-import 'package:ikomod/pages/PlansScreen.dart';
-import 'package:ikomod/pages/PostManagementScreen.dart';
-import 'package:ikomod/pages/PostScreen.dart';
-import 'package:ikomod/pages/ProfileScreen.dart';
+import './pages/CompetitionScreen.dart';
+import './pages/HomeScreen.dart';
+import './pages/NewPostScreen.dart';
+import './pages/PlansScreen.dart';
+import './pages/PostManagementScreen.dart';
+import './pages/PostScreen.dart';
+import './pages/ProfileScreen.dart';
 import './pages/SplashScreen.dart';
 
 void main() {
