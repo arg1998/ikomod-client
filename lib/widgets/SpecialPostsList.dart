@@ -8,14 +8,11 @@ class SpecialPostList extends StatelessWidget {
   final List<String> posts;
   final double itemWidth;
   final EdgeInsetsGeometry itemMargin;
-  //TODO: remove this and use the length of the input posts list
-  final int count;
 
   const SpecialPostList({
     Key key,
     this.height,
     this.posts,
-    this.count,
     this.itemWidth,
     this.itemMargin,
   }) : super(key: key);
@@ -24,7 +21,6 @@ class SpecialPostList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      // padding: EdgeInsets.symmetric(vertical: 10),
       width: double.infinity,
       height: height ?? 200,
       child: Column(
@@ -34,7 +30,7 @@ class SpecialPostList extends StatelessWidget {
         children: [
           HeadLine(
             text: "آگهی های ویژه",
-            lineColor: Colors.transparent,
+            textPadding: EdgeInsets.only(top: 5, right: 10, bottom: 5),
           ),
           Expanded(
             child: ListView.builder(
@@ -53,7 +49,7 @@ class SpecialPostList extends StatelessWidget {
                   ),
                 );
               },
-              itemCount: count,
+              itemCount: posts.length,
             ),
           )
         ],
