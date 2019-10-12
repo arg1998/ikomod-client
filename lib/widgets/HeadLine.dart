@@ -19,21 +19,10 @@ class HeadLine extends StatelessWidget {
     return Row(
       children: [
         Padding(
-          padding: textPadding ??
-              const EdgeInsets.only(right: 10, top: 5, bottom: 5),
+          padding: textPadding ?? const EdgeInsets.only(right: 10, bottom: 5, top: 5),
           child: Text(
             text,
             style: Theme.of(context).textTheme.headline,
-          ),
-        ),
-        Expanded(
-          child: Container(
-            margin:
-                lineMargin ?? EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-            decoration: BoxDecoration(
-                color: lineColor ?? Theme.of(context).accentColor,
-                borderRadius: BorderRadius.circular(10)),
-            height: 2,
           ),
         ),
       ],
