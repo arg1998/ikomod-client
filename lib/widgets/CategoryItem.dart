@@ -64,10 +64,10 @@ class _CategoryItemState extends State<CategoryItem>
             child: Center(
               child: Text(
                 widget.text,
-                style: Theme.of(context)
-                    .textTheme
-                    .subhead
-                    .copyWith(color: Colors.white),
+                style: Theme.of(context).textTheme.subhead.copyWith(
+                    color: Colors.white,
+                    fontFamily: "bkoodak",
+                    fontWeight: FontWeight.w700),
               ),
             ),
           ),
