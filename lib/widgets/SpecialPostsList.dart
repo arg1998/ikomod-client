@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ikomod/models/Post.model.dart';
 import 'package:ikomod/widgets/HeadLine.dart';
 import 'package:ikomod/widgets/SpecialPost.dart';
 
