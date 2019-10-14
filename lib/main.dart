@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import './utils/Theme.dart';
 import './pages/CompetitionScreen.dart';
 import './pages/HomeScreen.dart';
 import './pages/NewPostScreen.dart';
@@ -29,8 +31,15 @@ class IkomodApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: [Locale("fa", 'IR')],
+      locale: Locale("fa", "IR"),
       routes: _routes,
-      initialRoute: SplashScreen.routeName,
+      theme: generateTheme(context),
     );
   }
 }
