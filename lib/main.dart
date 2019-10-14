@@ -7,6 +7,7 @@ import './pages/PostManagementScreen.dart';
 import './pages/PostScreen.dart';
 import './pages/ProfileScreen.dart';
 import './pages/SplashScreen.dart';
+import './pages/LeaderBoardScreen.dart';
 
 void main() {
   runApp(IkomodApp());
@@ -22,6 +23,7 @@ class IkomodApp extends StatelessWidget {
     PostManagementScreen.routeName: (_) => PostManagementScreen(),
     PostScreen.routeName: (_) => PostScreen(),
     ProfileScreen.routeName: (_) => ProfileScreen(),
+    LeaderBoardScreen.routeName: (_) => LeaderBoardScreen(),
   };
 
   @override
