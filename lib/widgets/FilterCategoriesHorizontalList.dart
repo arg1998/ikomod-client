@@ -6,6 +6,7 @@ class FilterCategoriesHorizontalList extends StatelessWidget {
   final double height;
   final Widget child;
   final List<String> _categories = const [
+    "همه",
     "اکسسوری",
     "بلوز، شومیز و تیشرت",
     "پالتو،‌ کاپشن و سوییشرت",
