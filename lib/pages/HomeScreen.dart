@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:ikomod/widgets/FilterCategoriesHorizontalList.dart';
+import 'package:ikomod/widgets/FilterModal.dart';
+import 'package:ikomod/widgets/HomeAppBar.dart';
+import 'package:ikomod/widgets/HomeBottomNavBar.dart';
+import 'package:ikomod/widgets/IconImage.dart';
+import 'package:ikomod/widgets/MainPostsList.dart';
 import 'package:ikomod/widgets/SpecialPostsList.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -12,8 +17,28 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
+    const double bottomBarIconSize = 40;
 
     return Scaffold(
+      bottomNavigationBar: HomeBottomNavBar(iconSize: bottomBarIconSize,),
+      floatingActionButton: SizedBox(
+        height: 65,
+        width: 65,
+        child: FloatingActionButton(
+          elevation: 4,
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (contex) => FilterModal(screenSize: screenSize),
+            );
+          },
+          child: IconImage(
+            margin: EdgeInsets.all(3),
+            icon: IconImageAsset.filter,
+            size: double.infinity,
+          ),
+        ),
+      ),
       appBar: AppBar(
         titleSpacing: 0,
         centerTitle: true,
@@ -23,50 +48,16 @@ class HomeScreen extends StatelessWidget {
             //TODO: implement home menu button
           },
         ),
-        title: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              padding: EdgeInsets.all(3),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SizedBox(width: 5),
-                  Text(
-                    "۲۳۵۰",
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontFamily: "iransans",
-                        color: Color(0XFFff9500).withOpacity(0.9)),
-                  ),
-                  SizedBox(width: 5),
-                  Image.asset(
-                    "assets/images/coin-small.png",
-                    height: 25,
-                  ),
-                ],
-              ),
-            ),
-            Spacer(),
-            Text("آی کمد"),
-            Spacer(),
-          ],
-        ),
-        primary: true,
+        title: HomeAppBar(),
         actions: [
-          Image.asset(
-            "assets/images/search.png",
-            height: 24,
-            width: 24,
+          IconImage(
+            onTap: () {},
+            icon: IconImageAsset.search,
+            size: 24,
           ),
-          Image.asset(
-            "assets/images/bell.png",
-            height: 24,
-            width: 24,
+          IconImage(
+            icon: IconImageAsset.bell,
+            size: 24,
           ),
         ],
       ),
@@ -77,6 +68,7 @@ class HomeScreen extends StatelessWidget {
             () => Future.value(true),
           );
         },
+        color: Theme.of(context).primaryColor,
         child: Container(
           width: double.infinity,
           height: double.infinity,
@@ -91,14 +83,8 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               FilterCategoriesHorizontalList(height: 90),
-              SliverToBoxAdapter(
-                child: SizedBox(
-                  height: 1000,
-                  child: Placeholder(
-                    color: Colors.red,
-                  ),
-                ),
-              )
+              SliverToBoxAdapter(child: SizedBox(height: 25)),
+              MainPostsList(),
             ],
           ),
         ),
