@@ -11,7 +11,7 @@ class HomeScreen extends StatelessWidget {
   static const routeName = "/home";
 
   final specialPostsImages = List<String>.generate(20, (index) {
-    return "https://picsum.photos/300/400?random=${index}";
+    return "https://picsum.photos/200/400?random=${index}";
   });
 
   @override
@@ -20,7 +20,9 @@ class HomeScreen extends StatelessWidget {
     const double bottomBarIconSize = 40;
 
     return Scaffold(
-      bottomNavigationBar: HomeBottomNavBar(iconSize: bottomBarIconSize,),
+      bottomNavigationBar: HomeBottomNavBar(
+        iconSize: bottomBarIconSize,
+      ),
       floatingActionButton: SizedBox(
         height: 65,
         width: 65,
@@ -39,28 +41,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-      appBar: AppBar(
-        titleSpacing: 0,
-        centerTitle: true,
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          onPressed: () async {
-            //TODO: implement home menu button
-          },
-        ),
-        title: HomeAppBar(),
-        actions: [
-          IconImage(
-            onTap: () {},
-            icon: IconImageAsset.search,
-            size: 24,
-          ),
-          IconImage(
-            icon: IconImageAsset.bell,
-            size: 24,
-          ),
-        ],
-      ),
+      appBar: buildHomeAppBar(context),
       body: RefreshIndicator(
         onRefresh: () {
           return Future.delayed(
