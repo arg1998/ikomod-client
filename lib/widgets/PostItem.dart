@@ -20,7 +20,7 @@ class PostItem extends StatelessWidget {
     );
   }
 
-  Widget builPostItem(BuildContext context) {
+  Widget buildPostItem(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 4),
       child: Stack(
@@ -88,7 +88,7 @@ class PostItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Widget postItem = builPostItem(context);
+    final Widget postItem = buildPostItem(context);
 
     if (isCentered) {
       return buildCenterdWidget(postItem);
