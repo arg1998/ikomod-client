@@ -1,7 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:ikomod/utils/ConvertToPersian.dart';
+import 'package:ikomod/widgets/Coin.dart';
+import 'package:ikomod/widgets/ProfileImage.dart';
+import 'dart:math' as math;
 
 class LeaderBoardScreen extends StatelessWidget {
   static const routeName = "/leaderboard";
+
+  Border borderDecision(int index) {
+    if (index == 0) {
+      return Border.all(color: Colors.yellow);
+    } else if (index == 1) {
+      return Border.all(color: Color(0xFFC0C0C0));
+    } else if (index == 2) {
+      return Border.all(color: Color(0XFFCD7F32));
+    } else {
+      return Border.all(color: Colors.pink);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
@@ -10,7 +27,6 @@ class LeaderBoardScreen extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: Text("خانم های برتر در لحظه "),
-        backgroundColor: Colors.blueAccent,
       ),
       body: Container(
         width: double.infinity,
@@ -26,53 +42,81 @@ class LeaderBoardScreen extends StatelessWidget {
                   // height: screenSize.height * 0.19,
                   // color: Colors.yellowAccent,
                   child: Column(
-                    // mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
                       Container(
                         padding: EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          // color: Colors.red[100],
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              Row(
-                                children: <Widget>[
-                                  Text(
-                                    '۱۰۰ سکه',
-                                    textDirection: TextDirection.rtl,
-                                  ),
-                                  Icon(Icons.arrow_drop_up),
-                                ],
+                              Text(
+                                toPersian('${index}'),
+                                style: TextStyle(
+                                    color: Colors.black38, fontSize: 22),
                               ),
-                              Row(
-                                children: <Widget>[
-                                  Text('مریم'),
-                                  SizedBox(
-                                    width: 10,
-                                    height: 10,
-                                  ),
-                                  // TODO: replace with imageProfile widget
-                                  CircleAvatar(
-                                    backgroundColor: Colors.deepOrangeAccent,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                    height: 10,
-                                  ),
-                                  Text('${index}')
-                                ],
+                              SizedBox(
+                                width: 10,
+                                height: 10,
+                              ),
+                              // TODO: replace with imageProfile widget
+
+                              ProfileImage.fromUrl(
+                                url:
+                                    'https://picsum.photos/350?random=${math.Random().nextInt(520)}',
+                                size: 70,
+                                border: borderDecision(index),
+
+                                // border: Border.all(color: Colors.pinkAccent),
+                                // border: index == 0
+                                //     ? Border.all(color: Colors.yellow, width: 5)
+                                //     : index == 1
+                                //         ? Border.all(
+                                //             color: Color(0xFFC0C0C0), width: 5)
+                                //         : index == 2
+                                //             ? Border.all(
+                                //                 color: Color(0XFFCD7F32),
+                                //                 width: 5)
+                                //             : Border.all(color: Colors.pink),
+                              ),
+                              SizedBox(
+                                width: 10,
+                                height: 10,
+                              ),
+                              Text(
+                                'مریم',
+                                style: TextStyle(
+                                    color: Colors.black87, fontSize: 20),
+                              ),
+                              SizedBox(
+                                width: 10,
+                                height: 10,
+                              ),
+
+                              Spacer(
+                                flex: 1,
+                              ),
+                              Coin(
+                                coins: '۱۰۰۰',
+                                coinSize: 25,
+                                trailing: Icon(
+                                  Icons.arrow_drop_down,
+                                  color: Colors.red,
+                                  size: 30,
+                                ),
+                                border: Border.all(
+                                    color: Theme.of(context).primaryColor,
+                                    width: 1),
                               )
                             ],
                           ),
                         ),
                       ),
                       Divider(
-                        indent: 40,
-                        endIndent: 40,
+                        indent: 35,
+                        endIndent: 5,
                         color: Colors.black54,
                         height: 1,
                         thickness: 1,
@@ -86,57 +130,3 @@ class LeaderBoardScreen extends StatelessWidget {
     );
   }
 }
-
-//  body: Container(
-// width: double.infinity,
-// height: double.infinity,
-// color: Colors.lightBlue,
-// child: ListView.builder(
-// itemCount: 15,
-// itemBuilder: (BuildContext context, int index) {
-// return Padding(
-// padding: const EdgeInsets.all(5),
-// child: Container(
-// width: screenSize.width * 0.3,
-// height: screenSize.height * 0.12,
-// decoration: BoxDecoration(
-// color: Colors.red[100],
-// borderRadius: BorderRadius.circular(8),
-// ),
-// child: Padding(
-// padding: const EdgeInsets.symmetric(horizontal: 10),
-// child: Row(
-// mainAxisAlignment: MainAxisAlignment.spaceBetween,
-// children: <Widget>[
-// Row(
-// children: <Widget>[
-// Text('صد سکه'),
-// Icon(Icons.arrow_drop_up),
-// ],
-// ),
-// Row(
-// children: <Widget>[
-// Text('مریم'),
-// SizedBox(
-// width: 10,
-// height: 10,
-// ),
-// TODO: replace with imageProfile widget
-// CircleAvatar(
-// backgroundColor: Colors.deepOrangeAccent,
-// ),
-// SizedBox(
-// width: 10,
-// height: 10,
-// ),
-// Text('${index}')
-// ],
-// )
-// ],
-// ),
-// ),
-// ),
-// );
-// },
-// ),
-// ),
