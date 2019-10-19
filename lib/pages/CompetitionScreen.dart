@@ -14,9 +14,9 @@ class CompetitionScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-          centerTitle: true,
-          title: Text("مسابقات "),
-          backgroundColor: Colors.blueAccent),
+        centerTitle: true,
+        title: Text("مسابقات "),
+      ),
       body: Container(
         width: double.infinity,
         height: double.infinity,
@@ -27,7 +27,7 @@ class CompetitionScreen extends StatelessWidget {
           children: [
             Container(
               width: screenSize.width * 0.5,
-              height: screenSize.width * 0.3,
+              height: screenSize.width * 0.4,
               padding: EdgeInsets.all(5),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
@@ -38,19 +38,21 @@ class CompetitionScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   Text('اعلام نتایج'),
-                  Text('${day}:${hour}:${minutes}:${second}'),
+                  Text('${day}: ${hour}: ${minutes}: ${second}'),
                 ],
               ),
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-                new SplashButton(
-                  text: 'برنده ها',
+                SizedBox(width: 20),
+                Expanded(
+                  child: SplashButton(text: 'برنده ها', onPress: () {}),
                 ),
-                new SplashButton(
-                  text: 'برتر ها',
-                )
+                Spacer(),
+                Expanded(
+                  child: SplashButton(text: 'برتر ها', onPress: () {}),
+                ),
+                SizedBox(width: 20),
               ],
             )
           ],
