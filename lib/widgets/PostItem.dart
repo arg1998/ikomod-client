@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ikomod/utils/CustomFontIcons.dart';
 import 'package:ikomod/widgets/ProfileImage.dart';
 
 class PostItem extends StatelessWidget {
@@ -42,6 +43,7 @@ class PostItem extends StatelessWidget {
                         ProfileImage.fromUrl(
                           url: "https://picsum.photos/60/60?random=$index",
                           size: 40,
+                          border: Border.all(color: Colors.yellow, width: 4),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(right: 10),
@@ -58,12 +60,46 @@ class PostItem extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 8, horizontal: 5),
-                    child: Text(
-                      "این یک متن ازمایشی است.",
-                      maxLines: 2,
-                      style: TextStyle(fontSize: 20),
+                    padding: EdgeInsets.symmetric(vertical: 3, horizontal: 5),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              "۴۵۰۰۰ تومان",
+                              style: TextStyle(
+                                color: Colors.red,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 16,
+                                fontFamily: "bkoodak",
+                              ),
+                            ),
+                            Spacer(),
+                            Text(
+                              "۵۶",
+                              style: TextStyle(
+                                color: Colors.red,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 16,
+                                fontFamily: "bkoodak",
+                              ),
+                            ),
+                            Icon(
+                              CustomFontIcons.heart,
+                              color: Colors.red,
+                              size: 20,
+                            ),
+                          ],
+                        ),
+                        Text(
+                          "این یک متن ازمایشی است. برای دیدن بیشتر کلیک کنید.",
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        Text("دقایقی پیش")
+                      ],
                     ),
                   )
                 ],

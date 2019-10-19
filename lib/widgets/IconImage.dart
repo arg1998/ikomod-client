@@ -42,27 +42,29 @@ class IconImageAsset {
   String get iconUrl => _url;
 
 // list of all images in assets bundle
-  static IconImageAsset get bell => IconImageAsset("assets/images/bell.png");
+  static IconImageAsset get bell => IconImageAsset("assets/images/bell-small.png");
   static IconImageAsset get search =>
-      IconImageAsset("assets/images/search.png");
+      IconImageAsset("assets/images/search-small.png");
   static IconImageAsset get filter =>
-      IconImageAsset("assets/images/filter_1.png");
+      IconImageAsset("assets/images/filter-small.png");
   static IconImageAsset get shopping =>
-      IconImageAsset("assets/images/shopping.png");
-  static IconImageAsset get ads => IconImageAsset("assets/images/ads.png");
+      IconImageAsset("assets/images/shopping-small.png");
+  static IconImageAsset get ads => IconImageAsset("assets/images/ads-small.png");
   static IconImageAsset get billboard =>
-      IconImageAsset("assets/images/billboard.png");
+      IconImageAsset("assets/images/billboard-small.png");
   static IconImageAsset get camera =>
-      IconImageAsset("assets/images/camera.png");
-  static IconImageAsset get chat => IconImageAsset("assets/images/chat.png");
-  static IconImageAsset get gears => IconImageAsset("assets/images/gears.png");
+      IconImageAsset("assets/images/camera-small.png");
+  static IconImageAsset get chat => IconImageAsset("assets/images/chat-small.png");
+  static IconImageAsset get gears => IconImageAsset("assets/images/gears-small.png");
   static IconImageAsset get growth =>
-      IconImageAsset("assets/images/growth.png");
+      IconImageAsset("assets/images/growth-small.png");
   static IconImageAsset get article =>
-      IconImageAsset("assets/images/newspaper.png");
-  static IconImageAsset get plus => IconImageAsset("assets/images/plus.png");
+      IconImageAsset("assets/images/book-small.png");
+  static IconImageAsset get plus => IconImageAsset("assets/images/plus-small.png");
   static IconImageAsset get support =>
-      IconImageAsset("assets/images/support.png");
+      IconImageAsset("assets/images/support-small.png");
   static IconImageAsset get trophy =>
-      IconImageAsset("assets/images/trophy_1.png");
+      IconImageAsset("assets/images/trophy-small.png");
+      static IconImageAsset get cup =>
+      IconImageAsset("assets/images/cup-large.png");
 }
