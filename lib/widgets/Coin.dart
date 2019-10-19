@@ -29,9 +29,11 @@ class Coin extends StatelessWidget {
       decoration: BoxDecoration(
         color: background ?? Colors.white,
         borderRadius: BorderRadius.circular(borderRadius ?? 20),
+        border: border
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           if (trailing != null) trailing,
           SizedBox(width: 5),
