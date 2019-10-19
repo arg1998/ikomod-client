@@ -9,24 +9,23 @@ class SplashButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      borderRadius: BorderRadius.all(
-        Radius.circular(4),
-      ),
-      color: Color.fromRGBO(1, 42, 54, 0.7),
+      borderRadius: BorderRadius.circular(20),
+      color: Theme.of(context).primaryColor,
+      shadowColor: Colors.black,
+      elevation: 5,
       child: InkWell(
         highlightColor: Colors.black.withOpacity(0.2),
-        borderRadius: BorderRadius.all(
-          Radius.circular(5),
-        ),
+        borderRadius: BorderRadius.circular(20),
         child: Padding(
           padding: const EdgeInsets.symmetric(
             vertical: 10,
-            horizontal: 15,
+            horizontal: 10,
           ),
-          child: Text(
-            text,
-            style: TextStyle(
-              color: Colors.white,
+          child: Center(
+            child: Text(
+              text,
+              style: TextStyle(
+                  color: Colors.white, fontSize: 20, fontFamily: 'dinar'),
             ),
           ),
         ),
