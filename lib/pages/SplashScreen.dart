@@ -11,8 +11,15 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
   AnimationController controller;
-  Animation<double> progress, opacity;
+  Animation<double> progress,
+      entranceOpacity,
+      textExitOpacity,
+      imageExitOpacity;
   Animation<Offset> yOffset;
+
+  void _onFinishedLoading() {
+    Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+  }
 
   @override
   void initState() {
@@ -31,22 +38,48 @@ class _SplashScreenState extends State<SplashScreen>
       CurvedAnimation(
         curve: Interval(
           0.0,
-          0.35,
+          0.3,
           curve: Curves.decelerate,
         ),
         parent: controller,
       ),
     );
 
-    opacity = Tween<double>(
+    entranceOpacity = Tween<double>(
       begin: 0,
       end: 1,
     ).animate(
       CurvedAnimation(
         curve: Interval(
           0.0,
-          0.5,
-          curve: Curves.easeIn,
+          0.35,
+          curve: Curves.easeOut,
+        ),
+        parent: controller,
+      ),
+    );
+    textExitOpacity = Tween<double>(
+      begin: 1,
+      end: 0,
+    ).animate(
+      CurvedAnimation(
+        curve: Interval(
+          0.7,
+          1.0,
+          curve: Curves.linear,
+        ),
+        parent: controller,
+      ),
+    );
+    imageExitOpacity = Tween<double>(
+      begin: 1,
+      end: 0,
+    ).animate(
+      CurvedAnimation(
+        curve: Interval(
+          0.9,
+          1.0,
+          curve: Curves.linear,
         ),
         parent: controller,
       ),
@@ -59,9 +92,7 @@ class _SplashScreenState extends State<SplashScreen>
       ),
     );
 
-    controller.forward().whenComplete(() {
-      Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
-    });
+    controller.forward().whenComplete(_onFinishedLoading);
   }
 
   @override
@@ -82,8 +113,8 @@ class _SplashScreenState extends State<SplashScreen>
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: Opacity(
-                  opacity: opacity.value,
-                  child: Text(
+                  opacity: entranceOpacity.value * textExitOpacity.value,
+                  child: const Text(
                     "آی کمد",
                     style: TextStyle(
                       fontFamily: "ziba",
@@ -96,7 +127,7 @@ class _SplashScreenState extends State<SplashScreen>
               ),
             ),
             Opacity(
-              opacity: opacity.value,
+              opacity: entranceOpacity.value * imageExitOpacity.value,
               child: Transform.translate(
                 offset: yOffset.value,
                 child: Image.asset(

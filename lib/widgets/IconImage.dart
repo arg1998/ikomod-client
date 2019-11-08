@@ -93,4 +93,9 @@ class IconImageAsset {
       IconImageAsset("assets/images/medal-bronze-small.png");
   static IconImageAsset get bronzeMedalLarge =>
       IconImageAsset("assets/images/medal-bronze-large.png");
+
+  static IconImageAsset get gallerySmall =>
+      IconImageAsset("assets/images/gallery-small.png");
+  static IconImageAsset get galleryLarge =>
+      IconImageAsset("assets/images/gallery-large.png");
 }

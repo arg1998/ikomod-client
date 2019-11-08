@@ -16,16 +16,19 @@ class HeadLine extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Padding(
-          padding: textPadding ?? const EdgeInsets.only(right: 10, bottom: 5, top: 5),
-          child: Text(
-            text,
-            style: Theme.of(context).textTheme.headline,
+    return Container(
+      child: Row(
+        children: [
+          Padding(
+            padding: textPadding ??
+                const EdgeInsets.only(right: 10, bottom: 5, top: 5),
+            child: Text(
+              text,
+              style: Theme.of(context).textTheme.headline,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
