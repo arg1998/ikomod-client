@@ -1,13 +1,53 @@
 import 'package:flutter/material.dart';
+import 'package:ikomod/models/Post.model.dart';
 import 'package:ikomod/widgets/ProfileImage.dart';
 
 class SpecialPost extends StatelessWidget {
-  final String url;
+  final PostModel postData;
 
   const SpecialPost({
     Key key,
-    this.url,
+    this.postData,
   }) : super(key: key);
+
+  Widget _buildProfileImage(BuildContext ctx) {
+    return ProfileImage.fromUrl(
+      url: postData.user.imageUrl,
+      size: 45,
+      margin: EdgeInsets.all(5),
+      border: Border.all(
+        width: 2,
+        color: Theme.of(ctx).primaryColor,
+      ),
+    );
+  }
+
+  Widget _buildPostImage() {
+    return Image.network(
+      postData.imageUrls.first,
+      fit: BoxFit.cover,
+      alignment: Alignment.center,
+    );
+  }
+
+  Widget _buildPostTitle(BuildContext ctx) {
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+      color: Colors.black54,
+      child: Text(
+        postData.title,
+        maxLines: 2,
+        softWrap: true,
+        overflow: TextOverflow.fade,
+        style: Theme.of(ctx)
+            .textTheme
+            .subhead
+            .copyWith(color: Colors.white, fontSize: 18),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -16,39 +56,13 @@ class SpecialPost extends StatelessWidget {
         fit: StackFit.expand,
         alignment: Alignment.bottomLeft,
         children: [
-          Image.network(
-            url,
-            fit: BoxFit.cover,
-            alignment: Alignment.center,
-          ),
+          _buildPostImage(),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ProfileImage.fromUrl(
-                url: "https://picsum.photos/80/80?random=6",
-                size: 45,
-                margin: EdgeInsets.all(5),
-                border: Border.all(
-                  width: 2,
-                  color: Theme.of(context).primaryColor,
-                  
-                ),
-              ),
+              _buildProfileImage(context),
               Spacer(flex: 1),
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                color: Colors.black54,
-                child: Text(
-                  "این یک متن آزمایشی است.این یک متن آزمایشی است",
-                  maxLines: 2,
-                  softWrap: true,
-                  overflow: TextOverflow.fade,
-                  style: Theme.of(context)
-                      .textTheme
-                      .subhead
-                      .copyWith(color: Colors.white, fontSize: 18),
-                ),
-              )
+              _buildPostTitle(context)
             ],
           )
         ],
