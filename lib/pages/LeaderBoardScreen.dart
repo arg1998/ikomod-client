@@ -9,13 +9,13 @@ class LeaderBoardScreen extends StatelessWidget {
 
   Border borderDecision(int index) {
     if (index == 0) {
-      return Border.all(color: Colors.yellow);
+      return Border.all(color: Colors.yellow, width: 2);
     } else if (index == 1) {
-      return Border.all(color: Color(0xFFC0C0C0));
+      return Border.all(color: Color(0xFFC0C0C0), width: 2);
     } else if (index == 2) {
-      return Border.all(color: Color(0XFFCD7F32));
+      return Border.all(color: Color(0XFFCD7F32), width: 2);
     } else {
-      return Border.all(color: Colors.pink);
+      return Border.all(color: Colors.pink, width: 2);
     }
   }
 
@@ -53,7 +53,7 @@ class LeaderBoardScreen extends StatelessWidget {
                           child: Row(
                             children: <Widget>[
                               Text(
-                                toPersian('${index}'),
+                                toPersian('${index + 1}'),
                                 style: TextStyle(
                                     color: Colors.black38, fontSize: 22),
                               ),
@@ -68,18 +68,6 @@ class LeaderBoardScreen extends StatelessWidget {
                                     'https://picsum.photos/350?random=${math.Random().nextInt(520)}',
                                 size: 70,
                                 border: borderDecision(index),
-
-                                // border: Border.all(color: Colors.pinkAccent),
-                                // border: index == 0
-                                //     ? Border.all(color: Colors.yellow, width: 5)
-                                //     : index == 1
-                                //         ? Border.all(
-                                //             color: Color(0xFFC0C0C0), width: 5)
-                                //         : index == 2
-                                //             ? Border.all(
-                                //                 color: Color(0XFFCD7F32),
-                                //                 width: 5)
-                                //             : Border.all(color: Colors.pink),
                               ),
                               SizedBox(
                                 width: 10,
