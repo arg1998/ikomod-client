@@ -1,18 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:ikomod/widgets/FilterCategoriesHorizontalList.dart';
 import 'package:ikomod/widgets/FilterModal.dart';
+import 'package:ikomod/widgets/HeadLine.dart';
 import 'package:ikomod/widgets/HomeAppBar.dart';
 import 'package:ikomod/widgets/HomeBottomNavBar.dart';
 import 'package:ikomod/widgets/IconImage.dart';
 import 'package:ikomod/widgets/MainPostsList.dart';
 import 'package:ikomod/widgets/SpecialPostsList.dart';
+import '../FAKE_DATA/FakePostData.dart' as FAKE_POSTS;
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   static const routeName = "/home";
 
-  final specialPostsImages = List<String>.generate(20, (index) {
-    return "https://picsum.photos/200/400?random=${index}";
-  });
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  Widget _buildFAB(Size screenSize) {
+    return SizedBox(
+      height: 65,
+      width: 65,
+      child: FloatingActionButton(
+        elevation: 4,
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (contex) => FilterModal(screenSize: screenSize),
+          );
+        },
+        child: IconImage(
+          margin: EdgeInsets.all(3),
+          icon: IconImageAsset.filter,
+          size: double.infinity,
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,30 +47,17 @@ class HomeScreen extends StatelessWidget {
       bottomNavigationBar: HomeBottomNavBar(
         iconSize: bottomBarIconSize,
       ),
-      floatingActionButton: SizedBox(
-        height: 65,
-        width: 65,
-        child: FloatingActionButton(
-          elevation: 4,
-          onPressed: () {
-            showDialog(
-              context: context,
-              builder: (contex) => FilterModal(screenSize: screenSize),
-            );
-          },
-          child: IconImage(
-            margin: EdgeInsets.all(3),
-            icon: IconImageAsset.filter,
-            size: double.infinity,
-          ),
-        ),
-      ),
+      floatingActionButton: _buildFAB(screenSize),
       appBar: buildHomeAppBar(context),
       body: RefreshIndicator(
         onRefresh: () {
+          FAKE_POSTS.refreshHomeLists();
           return Future.delayed(
             Duration(seconds: 2),
-            () => Future.value(true),
+            () {
+              setState(() {});
+              return Future.value(true);
+            },
           );
         },
         color: Theme.of(context).primaryColor,
@@ -58,12 +69,18 @@ class HomeScreen extends StatelessWidget {
             slivers: [
               SliverToBoxAdapter(
                 child: SpecialPostList(
-                  posts: specialPostsImages,
+                  posts: FAKE_POSTS.specialPosts,
                   itemWidth: screenSize.width * 0.4,
                   height: screenSize.height * 0.4,
                 ),
               ),
-              FilterCategoriesHorizontalList(height: 90),
+              SliverToBoxAdapter(
+                child: HeadLine(
+                  text: "سایر آگهی ها",
+                  textPadding: EdgeInsets.only(top: 10, right: 10),
+                ),
+              ),
+              FilterCategoriesHorizontalList(height: 60),
               SliverToBoxAdapter(child: SizedBox(height: 25)),
               MainPostsList(),
             ],
