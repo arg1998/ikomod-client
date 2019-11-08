@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ikomod/widgets/PostCard.dart';
 import 'package:ikomod/widgets/ProfileImage.dart';
-import 'package:ikomod/widgets/ShadowButton.dart';
+import 'package:ikomod/widgets/ShadowLabel.dart';
 import '../models/Constants.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -96,7 +96,7 @@ class CollapsingList extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 10),
-                        new ShadowButton(
+                        new ShadowLabel(
                           number: '۲۲',
                         ),
                       ],
@@ -112,7 +112,7 @@ class CollapsingList extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 10),
-                        ShadowButton(
+                        ShadowLabel(
                           number: '۱۰',
                         )
                       ],
