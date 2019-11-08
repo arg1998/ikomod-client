@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:ikomod/pages/WinnerScreen.dart';
 import './utils/Theme.dart';
 import './pages/CompetitionScreen.dart';
 import './pages/HomeScreen.dart';
@@ -26,6 +27,7 @@ class IkomodApp extends StatelessWidget {
     PostScreen.routeName: (_) => PostScreen(),
     ProfileScreen.routeName: (_) => ProfileScreen(),
     LeaderBoardScreen.routeName: (_) => LeaderBoardScreen(),
+    WinnerScreen.routeName: (_) => WinnerScreen()
   };
 
   @override
