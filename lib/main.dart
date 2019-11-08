@@ -1,5 +1,7 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:ikomod/pages/CameraFeed.dart';
 import './utils/Theme.dart';
 import './pages/CompetitionScreen.dart';
 import './pages/HomeScreen.dart';
@@ -11,7 +13,11 @@ import './pages/ProfileScreen.dart';
 import './pages/SplashScreen.dart';
 import './pages/LeaderBoardScreen.dart';
 
-void main() {
+CameraDescription camera;
+
+Future<void> main() async {
+  final List<CameraDescription> cameras = await availableCameras();
+  camera = cameras.first;
   runApp(IkomodApp());
 }
 
@@ -26,6 +32,7 @@ class IkomodApp extends StatelessWidget {
     PostScreen.routeName: (_) => PostScreen(),
     ProfileScreen.routeName: (_) => ProfileScreen(),
     LeaderBoardScreen.routeName: (_) => LeaderBoardScreen(),
+    CameraFeed.routeName: (_) => CameraFeed(),
   };
 
   @override
