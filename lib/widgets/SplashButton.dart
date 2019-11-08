@@ -18,14 +18,17 @@ class SplashButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         child: Padding(
           padding: const EdgeInsets.symmetric(
-            vertical: 10,
-            horizontal: 10,
+            vertical: 5,
+            horizontal: 5,
           ),
           child: Center(
             child: Text(
               text,
               style: TextStyle(
-                  color: Colors.white, fontSize: 20, fontFamily: 'dinar'),
+                color: Colors.white,
+                fontSize: 18,
+                fontFamily: 'dinar',
+              ),
             ),
           ),
         ),

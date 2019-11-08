@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:ikomod/utils/CustomFontIcons.dart';
 import 'CustomLinePaint.dart';
+import 'PostCard.dart';
 import 'ProfileImage.dart';
+import 'dart:math' show sin, cos, pi;
 
 class RanksPost extends StatelessWidget {
   final Text personNumber;
@@ -9,109 +12,107 @@ class RanksPost extends StatelessWidget {
   const RanksPost({Key key, this.personNumber, this.rankNumber})
       : super(key: key);
 
-  Border borderMaker() {
-    int temporary = this.rankNumber;
-    bool first = temporary == 1;
-    const Color FirstColor = Colors.yellow;
-    bool second = temporary == 2;
-    const Color SecondColor = Color(0xFFC0C0C0);
-    // bool third = temporary == 3;
-    const Color ThirdColor = Color(0XFFCD7F32);
-    if (first) {
-      return Border.all(color: FirstColor, width: 2);
-    } else if (second) {
-      return Border.all(color: SecondColor, width: 2);
-    } else {
-      return Border.all(color: ThirdColor, width: 2);
+  Color personNumberFillColor() {
+    Color color;
+    switch (rankNumber) {
+      case 1:
+        color = Color(0xFFFFD801);
+        break;
+      case 2:
+        color = Color(0xFFaaa9ad);
+        break;
+      case 3:
+        color = Color(0XFFd28c47);
+        break;
+      default:
+        color = Colors.transparent;
+        break;
+    }
+    return color;
+  }
+
+  Border personNumberBorder({double borderWidth = 2}) {
+    if (rankNumber > 3) {
+      return Border.all(
+        color: Colors.pink,
+        width: borderWidth,
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
+    double badgeHeight = screenSize.width / 15.0;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
         SizedBox(height: 20),
-        personNumber,
+        Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: personNumberFillColor(),
+            border: personNumberBorder(),
+            borderRadius: BorderRadius.circular(45),
+          ),
+          child: personNumber,
+        ),
+
+        SizedBox(
+          height: 15,
+        ),
         ProfileImage.fromUrl(
-          border: borderMaker(),
+          showBadges: true,
+          border: Border.all(color: Colors.pink, width: 1),
           url: 'https://picsum.photos/150',
           size: 80,
           margin: EdgeInsets.all(0),
-        ),
-        Triangle(
-          width: screenSize.width * 0.4,
-          height: screenSize.width * 0.2,
-          lineWidth: 3,
-          lineColor: Colors.redAccent,
-        ),
-        Container(
-          width: screenSize.width * 0.65,
-          child: Card(
-            elevation: 2,
-            margin: EdgeInsets.all(0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                AspectRatio(
-                  aspectRatio: 1.4,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(5),
-                      topRight: Radius.circular(5),
-                    ),
-                    child: Image.network(
-                      'https://picsum.photos/250',
-                      fit: BoxFit.cover,
+          badges: [
+            ProfileBadge(
+              height: badgeHeight,
+              width: badgeHeight,
+              angle: pi / 6,
+              child: DecoratedBox(
+                position: DecorationPosition.background,
+                decoration: BoxDecoration(),
+                child: Container(
+                  child: Center(
+                    child: Text(
+                      '۲۲',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 15,
+                        fontFamily: "dinar",
+                      ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(6.0),
-                  child: SizedBox(
-                    height: 50,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            Text('دقایقی پیش',
-                                style: TextStyle(
-                                    fontSize: 16, fontFamily: 'ziba')),
-                            Spacer(),
-                            Text(
-                              '۲۰',
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  fontFamily: 'ziba',
-                                  color: Colors.black),
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Icon(
-                              Icons.adjust,
-                              color: Theme.of(context).primaryColorDark,
-                            )
-                          ],
-                        ),
-                        Text(
-                          'این آگهی آزمایشی است',
-                          maxLines: 2,
-                          style: TextStyle(fontSize: 20, fontFamily: 'ziba'),
-                        )
-                      ],
-                    ),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.red,
                   ),
                 ),
-              ],
+              ),
+              // offset: const Offset(4, 4),
             ),
-          ),
+          ],
         ),
+        SizedBox(
+          height: 15,
+        ),
+        // Triangle(
+        //   width: screenSize.width * 0.4,
+        //   height: screenSize.width * 0.2,
+        //   lineWidth: 3,
+        //   lineColor: Colors.redAccent,
+        // ),
+        new PostCard(
+          cardWidth: screenSize.width * 0.68,
+          hasCardWith: true,
+        ),
+        SizedBox(
+          height: 50,
+        )
       ],
     );
   }
