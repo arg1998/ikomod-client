@@ -1,28 +1,78 @@
 import 'package:flutter/material.dart';
+import 'package:ikomod/models/User.model.dart';
 import 'package:ikomod/widgets/IconImage.dart';
 import 'package:ikomod/widgets/MenuItem.dart';
 import 'dart:math' show pi;
 import 'ProfileImage.dart';
 
 class HomeMenuModal extends StatelessWidget {
+  final UserModel selfUser;
+  final Size screenSize;
+
   const HomeMenuModal({
     Key key,
+    this.selfUser,
     @required this.screenSize,
   }) : super(key: key);
 
-  final Size screenSize;
-
-  Widget getCircle([Color color = Colors.green]) {
-    return Container(
-      height: double.infinity,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: color,
-        border: Border.all(
-          color: Colors.pink,
-          width: 2,
+  Widget _buildProfileImage(Color borderColor) {
+    return ProfileImage.fromUrl(
+      url: selfUser.imageUrl,
+      border: Border.all(
+        color: borderColor,
+        width: 3,
+      ),
+      size: 120,
+      showBadges: true,
+      margin: EdgeInsets.all(10),
+      badges: [
+        ProfileBadge.square(
+          child: Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: borderColor,
+                width: 2,
+              ),
+            ),
+            child: IconImage(
+              icon: IconImageAsset.editSmall,
+              padding: EdgeInsets.all(0),
+              onTap: () {
+                //TODO: edit profile page
+              },
+            ),
+          ),
+          size: 35,
+          angle: -pi / 4,
         ),
+      ],
+    );
+  }
+
+  Widget _buildDivider() {
+    return const Divider(
+      color: Colors.black26,
+      indent: 45,
+      endIndent: 20,
+      height: 2,
+      thickness: 1,
+    );
+  }
+
+  Widget _buildUserName() {
+    return Text(
+      selfUser.name,
+      style: TextStyle(fontSize: 25, fontFamily: "dinar"),
+    );
+  }
+
+  Widget _buildUserBio() {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 2, horizontal: 20),
+      child: Text(
+        selfUser.bio,
+        style: TextStyle(fontFamily: "iransans", fontSize: 16),
       ),
     );
   }
@@ -30,93 +80,59 @@ class HomeMenuModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData appTheme = Theme.of(context);
-    const Widget divider = Divider(
-      color: Colors.black26,
-      indent: 45,
-      endIndent: 20,
-      height: 2,
-      thickness: 0.5,
-    );
 
     return Center(
-      child: Container(
-        width: screenSize.width * 0.7,
-        child: Material(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(5),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).pop();
-                },
-                child: ProfileImage.fromUrl(
-                  url: "https://picsum.photos/200",
-                  border: Border.all(
-                    color: appTheme.primaryColor,
-                    width: 3,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(5),
+        child: Container(
+          constraints: BoxConstraints(
+            maxHeight: screenSize.height * 0.9,
+            maxWidth: screenSize.width * 0.7,
+          ),
+          child: SingleChildScrollView(
+            child: Material(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(5),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  _buildProfileImage(appTheme.primaryColor),
+                  _buildUserName(),
+                  _buildUserBio(),
+                  _buildDivider(),
+                  MenuItem(
+                    icon: IconImageAsset.chat,
+                    badgeValue: "۳۴",
+                    text: "پیام های من",
                   ),
-                  size: 110,
-                  showBadges: true,
-                  margin: EdgeInsets.all(10),
-                  badges: [
-                    ProfileBadge.square(
-                      child: CircleAvatar(
-                        backgroundColor: Colors.pink,
-                        child: Center(
-                          child: Icon(
-                            Icons.done,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                      size: 30,
-                      angle: 14 * pi / 8,
-                    )
-                  ],
-                ),
+                  _buildDivider(),
+                  MenuItem(
+                    icon: IconImageAsset.ads,
+                    text: "آگهی های من",
+                  ),
+                  _buildDivider(),
+                  MenuItem(
+                    icon: IconImageAsset.article,
+                    text: "مقالات",
+                    badgeValue: "۲",
+                  ),
+                  _buildDivider(),
+                  MenuItem(
+                    icon: IconImageAsset.support,
+                    text: "تماس با ما",
+                  ),
+                  _buildDivider(),
+                  MenuItem(
+                    icon: IconImageAsset.gears,
+                    text: "تنظیمات",
+                  ),
+                  SizedBox(
+                    height: 10,
+                  )
+                ],
               ),
-              Text(
-                "امیر رضا قربانی",
-                style: TextStyle(fontSize: 25, fontFamily: "dinar"),
-              ),
-              Divider(
-                color: Colors.pink,
-                thickness: 1,
-                indent: 10,
-                endIndent: 10,
-              ),
-              MenuItem(
-                icon: IconImageAsset.chat,
-                badgeValue: "۳۴",
-                text: "پیام های من",
-              ),
-              divider,
-              MenuItem(
-                icon: IconImageAsset.ads,
-                text: "آگهی های من",
-              ),
-              divider,
-              MenuItem(
-                icon: IconImageAsset.article,
-                text: "مقالات",
-                badgeValue: "۲",
-              ),
-              divider,
-              MenuItem(
-                icon: IconImageAsset.support,
-                text: "تماس با ما",
-              ),
-              divider,
-              MenuItem(
-                icon: IconImageAsset.gears,
-                text: "تنظیمات",
-              ),
-              SizedBox(
-                height: 20,
-              )
-            ],
+            ),
           ),
         ),
       ),

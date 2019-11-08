@@ -29,20 +29,27 @@ class FilterCategoriesHorizontalList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Color _c = Theme.of(context).scaffoldBackgroundColor;
+
     return SliverPersistentHeader(
       pinned: true,
       delegate: _SliverStickyHeader(
-        height: height ?? 150,
+        height: height ?? 100,
         child: Container(
-          color: Colors.white,
-          padding: EdgeInsets.only(bottom: 8),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment(0, 0),
+              end: Alignment.bottomCenter,
+              colors: [
+                _c,
+                _c.withOpacity(0.0),
+              ],
+            ),
+          ),
+          padding: EdgeInsets.only(bottom: 5, top: 5),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              HeadLine(
-                text: "سایر آگهی ها",
-                textPadding: EdgeInsets.only(top: 10, right: 10),
-              ),
               Expanded(
                 flex: 1,
                 child: ListView.builder(

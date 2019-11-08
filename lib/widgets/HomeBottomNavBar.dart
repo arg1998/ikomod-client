@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ikomod/pages/NewPostScreen.dart';
 
 import 'IconImage.dart';
 
@@ -12,8 +13,8 @@ class HomeBottomNavBar extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(50),
-          topRight: Radius.circular(50),
+          topLeft: Radius.circular(25),
+          topRight: Radius.circular(25),
         ),
         color: Theme.of(context).primaryColor,
         boxShadow: [
@@ -35,7 +36,9 @@ class HomeBottomNavBar extends StatelessWidget {
               size: iconSize,
             ),
             IconImage(
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pushNamed(NewPostScreen.routeName);
+              },
               margin: EdgeInsets.all(5),
               icon: IconImageAsset.plus,
               size: iconSize + 15,

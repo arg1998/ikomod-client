@@ -39,10 +39,9 @@ class _CategoryItemState extends State<CategoryItem>
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTapDown: (_) {
+      onTap: () {
         _animController.forward().whenComplete(_animController.reverse);
       },
-      onTap: () {},
       child: Transform.scale(
         scale: _scaleAnim.value,
         child: Opacity(

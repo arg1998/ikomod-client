@@ -16,7 +16,7 @@ class MenuItem extends StatelessWidget {
     this.text = "",
     this.badgeValue,
     this.icon,
-    this.size = 65,
+    this.size = 50,
     this.onPressed,
     this.margin,
   }) : super(key: key);
@@ -33,7 +33,7 @@ class MenuItem extends StatelessWidget {
           children: [
             ProfileImage.fromAssets(
               url: icon.iconUrl,
-              size: 55,
+              size: this.size,
               showBadges: hasBadge,
               badges: [
                 if (hasBadge)
@@ -46,13 +46,13 @@ class MenuItem extends StatelessWidget {
                           badgeValue,
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 15,
+                            fontSize: 12,
                             fontFamily: "dinar",
                           ),
                         ),
                       ),
                     ),
-                    size: 25,
+                    size: 20,
                     angle: 3 * pi / 4,
                     radiusOffset: 20,
                   )
@@ -63,7 +63,7 @@ class MenuItem extends StatelessWidget {
             Expanded(
               child: Text(
                 text,
-                style: TextStyle(fontSize: 18, fontFamily: "yekan"),
+                style: TextStyle(fontSize: 16, fontFamily: "yekan"),
               ),
             ),
           ],
