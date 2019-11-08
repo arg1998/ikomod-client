@@ -3,6 +3,13 @@ import 'package:ikomod/widgets/RanksPost.dart';
 
 class WinnerScreen extends StatelessWidget {
   static const routeName = "/winner";
+  final rankTitle = <String>[
+    'نفر اول',
+    'نفر دوم',
+    'نفر سوم',
+    'نفر چهارم',
+    'نفر پنجم'
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -12,55 +19,26 @@ class WinnerScreen extends StatelessWidget {
         centerTitle: true,
         title: Text("برنده ها"),
       ),
-      body: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints viewportConstraints) {
-          return Container(
-            width: double.infinity,
-            height: double.infinity,
-            child: SingleChildScrollView(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(),
-                child: Column(
-                  children: <Widget>[
-                    RanksPost(
-                      personNumber: Text(
-                        'نفر اول',
-                        style: TextStyle(
-                          fontFamily: 'dinar',
-                          fontSize: 19,
-                        ),
-                      ),
-                      rankNumber: 1,
-                    ),
-                    RanksPost(
-                      personNumber: Text(
-                        'نفر دوم',
-                        style: TextStyle(
-                          fontFamily: 'dinar',
-                          fontSize: 19,
-                        ),
-                      ),
-                      rankNumber: 2,
-                    ),
-                    RanksPost(
-                      personNumber: Text(
-                        'نفر سوم',
-                        style: TextStyle(
-                          fontFamily: 'dinar',
-                          fontSize: 19,
-                        ),
-                      ),
-                      rankNumber: 3,
-                    ),
-                    SizedBox(
-                      height: 50,
-                    )
-                  ],
+      body: Container(
+        height: double.infinity,
+        // color: Colors.amberAccent,
+        child: ListView.builder(
+          itemCount: 5,
+          itemBuilder: (BuildContext context, int index) {
+            return RanksPost(
+              personNumber: Text(
+                rankTitle[index],
+                style: TextStyle(
+                  fontFamily: 'ziba',
+                  fontWeight: FontWeight.w900,
+                  fontSize: 24,
+                  color: Colors.black
                 ),
               ),
-            ),
-          );
-        },
+              rankNumber: index + 1,
+            );
+          },
+        ),
       ),
     );
   }
